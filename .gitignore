@@ -30,3 +30,9 @@ docker-data/
 poetry.lock
 Pipfile
 Pipfile.lock
+# env & local
+.env
+.env.local
+# node
+node_modules/
+dist/

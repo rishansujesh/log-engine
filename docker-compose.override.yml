@@ -1,0 +1,13 @@
+services:
+  indexer:
+    build:
+      context: ./services/indexer
+    command: python -m app.main
+    env_file: .env
+    depends_on:
+      kafka:
+        condition: service_healthy
+      opensearch:
+        condition: service_healthy
+    networks:
+      - lognet

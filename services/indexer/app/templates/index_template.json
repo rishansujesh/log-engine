@@ -1,0 +1,55 @@
+{
+  "index_patterns": ["logs-*"],
+  "template": {
+    "settings": {
+      "index": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0,
+        "refresh_interval": "1s"
+      },
+      "analysis": {
+        "analyzer": {
+          "message_analyzer": {
+            "type": "standard",
+            "stopwords": "_none_"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "dynamic": true,
+      "dynamic_templates": [
+        {
+          "labels_keywords": {
+            "path_match": "labels.*",
+            "mapping": { "type": "keyword", "ignore_above": 1024 }
+          }
+        },
+        {
+          "fields_keywords": {
+            "path_match": "fields.*",
+            "mapping": { "type": "keyword", "ignore_above": 1024 }
+          }
+        }
+      ],
+      "properties": {
+        "@timestamp": { "type": "date" },
+        "level":      { "type": "keyword" },
+        "service":    { "type": "keyword" },
+        "env":        { "type": "keyword" },
+        "host":       { "type": "keyword" },
+        "traceId":    { "type": "keyword" },
+        "message": {
+          "type": "text",
+          "analyzer": "message_analyzer",
+          "fields": { "keyword": { "type": "keyword", "ignore_above": 2048 } }
+        },
+        "labels": { "type": "object", "dynamic": true },
+        "fields": { "type": "object", "dynamic": true }
+      }
+    },
+    "aliases": {}
+  },
+  "composed_of": [],
+  "priority": 100
+}

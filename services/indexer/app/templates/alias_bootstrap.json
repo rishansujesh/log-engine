@@ -1,0 +1,5 @@
+{
+  "actions": [
+    { "add": { "index": "logs-__TODAY__", "alias": "logs-write", "is_write_index": true } }
+  ]
+}

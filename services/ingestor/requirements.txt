@@ -1,0 +1,4 @@
+aiokafka==0.10.0
+pydantic==2.8.2
+pydantic-settings==2.4.0
+pytest==8.2.1
