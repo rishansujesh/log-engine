@@ -27,20 +27,28 @@ This project simulates a production-grade architecture for high-velocity log ana
 
 ##  Architecture
 
-            +--------------+       +--------------+
-  API  ---> |   Kafka      | --->  |   Ingestor   | --->  Kafka (parsed logs)
- (FastAPI)  |   logs.raw   |       +--------------+
-            +--------------+
-                                        |
-                                        v
-                               +--------------+
-                               |   Indexer    | ---> OpenSearch (logs-yyyy.MM.dd)
-                               +--------------+
-                                        |
-                                        v
-                               +----------------+
-                               |   Query API    | ---> API / Dashboards
-                               +----------------+
+API (FastAPI)
+    |
+    v
+Kafka (logs.raw)
+    |
+    v
+Ingestor
+    |
+    v
+Kafka (parsed logs)
+    |
+    v
+Indexer
+    |
+    v
+OpenSearch (logs-yyyy.MM.dd)
+    |
+    v
+Query API
+    |
+    v
+API / Dashboards
 
 
 | Component       | Purpose                                           | Key Tools / Libraries |
